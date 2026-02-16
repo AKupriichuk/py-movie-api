@@ -5,11 +5,11 @@ from .models import Movie
 from .serializers import MovieSerializer
 
 
-@api_view(["Get", "POST"])
+@api_view(["GET", "POST"])
 def movie_list(request):
    if request.method == "GET":
-       buses = Movie.objects.all()
-       serializer = MovieSerializer(buses, many=True)
+       movie = Movie.objects.all()
+       serializer = MovieSerializer(movie, many=True)
        return Response(serializer.data, status=200)
 
    if request.method == "POST":
@@ -17,7 +17,6 @@ def movie_list(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 
 @api_view(["GET", "PUT", "DELETE"])
@@ -36,7 +35,7 @@ def movie_detail(request, pk):
         serializer = MovieSerializer(movie, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     if request.method == "DELETE":
         movie.delete()

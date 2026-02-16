@@ -3,5 +3,5 @@ from cinema import views
 
 urlpatterns = [
     path("movies/", views.movie_list),
-    path("movie/<int:pk>/", views.movie_detail),
+    path("movies/<int:pk>/", views.movie_detail),
 ]
